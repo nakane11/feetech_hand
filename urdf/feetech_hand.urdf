@@ -1,0 +1,1372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version:   Build Version: 1.6.9305.33219
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="feetech_hand">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.0510461038632851 -0.00442200304610835 0.00401472301069262"
+        rpy="0 0 0" />
+      <mass
+        value="0.111291548882845" />
+      <inertia
+        ixx="4.24156665437626E-05"
+        ixy="1.22720425877618E-06"
+        ixz="1.33394840110965E-08"
+        iyy="1.96297178307063E-05"
+        iyz="1.43204832681732E-06"
+        izz="3.98501285103428E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/base_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/base_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="index_pulley_link">
+    <inertial>
+      <origin
+        xyz="5.36147333676275E-05 -5.38369011636453E-05 -0.000552318187598596"
+        rpy="0 0 0" />
+      <mass
+        value="0.0010766893572167" />
+      <inertia
+        ixx="2.21586596253831E-08"
+        ixy="-2.31408490056444E-10"
+        ixz="-7.38804536414895E-12"
+        iyy="2.21540492822444E-08"
+        iyz="7.5170062792964E-12"
+        izz="4.25056471041654E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0.0252042816185978 -0.065 -0.0230791103718739"
+        rpy="2.10614007109957E-16 -3.2606427982226E-17 1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/index_pulley_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.913725490196078 0.913725490196078 0.913725490196078 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0.0252042816185978 -0.065 -0.0230791103718739"
+        rpy="2.10614007109957E-16 -3.2606427982226E-17 1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/index_pulley_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="index_pulley_joint"
+    type="continuous">
+    <origin
+      xyz="0.065 0.025204 0.023079"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="index_pulley_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="middle_pulley_link">
+    <inertial>
+      <origin
+        xyz="5.36147333676171E-05 -5.3836901163673E-05 -0.000552318187598586"
+        rpy="0 0 0" />
+      <mass
+        value="0.0010766893572167" />
+      <inertia
+        ixx="2.21586596253831E-08"
+        ixy="-2.31408490056431E-10"
+        ixz="-7.38804536414854E-12"
+        iyy="2.21540492822443E-08"
+        iyz="7.5170062793006E-12"
+        izz="4.25056471041653E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0.0192042816185978 -0.083 -0.0230791103718739"
+        rpy="2.10614007109957E-16 -3.2606427982226E-17 1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/middle_pulley_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0.0192042816185978 -0.083 -0.0230791103718739"
+        rpy="2.10614007109957E-16 -3.2606427982226E-17 1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/middle_pulley_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="middle_pulley_joint"
+    type="continuous">
+    <origin
+      xyz="0.083 0.019204 0.023079"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="middle_pulley_link" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="ring_pulley_link">
+    <inertial>
+      <origin
+        xyz="5.36147333676275E-05 -5.38369011636591E-05 -0.000552318187598582"
+        rpy="0 0 0" />
+      <mass
+        value="0.0010766893572167" />
+      <inertia
+        ixx="2.21586596253831E-08"
+        ixy="-2.31408490056452E-10"
+        ixz="-7.38804536416075E-12"
+        iyy="2.21540492822443E-08"
+        iyz="7.5170062792928E-12"
+        izz="4.25056471041653E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.0187957183814022 -0.0745 -0.0230791103718739"
+        rpy="2.10614007109957E-16 -3.2606427982226E-17 1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/ring_pulley_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.913725490196078 0.913725490196078 0.913725490196078 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0187957183814022 -0.0745 -0.0230791103718739"
+        rpy="2.10614007109957E-16 -3.2606427982226E-17 1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/ring_pulley_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="ring_pulley_joint"
+    type="continuous">
+    <origin
+      xyz="0.0745 -0.018796 0.023079"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="ring_pulley_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="little_pulley_link">
+    <inertial>
+      <origin
+        xyz="5.36147333676275E-05 -5.38369011636869E-05 -0.000552318187598596"
+        rpy="0 0 0" />
+      <mass
+        value="0.0010766893572167" />
+      <inertia
+        ixx="2.21586596253831E-08"
+        ixy="-2.3140849005644E-10"
+        ixz="-7.38804536414296E-12"
+        iyy="2.21540492822443E-08"
+        iyz="7.51700627929889E-12"
+        izz="4.25056471041653E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.0247957183814022 -0.0565 -0.0230791103718739"
+        rpy="2.10614007109957E-16 -3.2606427982226E-17 1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/little_pulley_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0247957183814022 -0.0565 -0.0230791103718739"
+        rpy="2.10614007109957E-16 -3.2606427982226E-17 1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/little_pulley_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="little_pulley_joint"
+    type="continuous">
+    <origin
+      xyz="0.0565 -0.024796 0.023079"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="little_pulley_link" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="index0_link">
+    <inertial>
+      <origin
+        xyz="0.00445014268647478 -0.000240886847767005 0.00154966466459459"
+        rpy="0 0 0" />
+      <mass
+        value="0.000865519851536484" />
+      <inertia
+        ixx="1.84980794444347E-08"
+        ixy="2.30708382645031E-10"
+        ixz="1.65463907072842E-09"
+        iyy="2.48506091099505E-08"
+        iyz="6.87162250500033E-11"
+        izz="2.76838220925201E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.101 -0.0332042816185978 0.00482088962812614"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/index0_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.101 -0.0332042816185978 0.00482088962812614"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/index0_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="index0_joint"
+    type="continuous">
+    <origin
+      xyz="0.101 0.033204 -0.0048209"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="index0_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="index1_link">
+    <inertial>
+      <origin
+        xyz="0.0137510540879233 -7.6913032380499E-08 0.000928358035499054"
+        rpy="0 0 0" />
+      <mass
+        value="0.00146017613490541" />
+      <inertia
+        ixx="2.59491977717738E-08"
+        ixy="1.81491841636018E-12"
+        ixz="-1.04888119608436E-09"
+        iyy="1.23664189367533E-07"
+        iyz="-6.43050789747535E-13"
+        izz="1.30816910156842E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.112065 -0.0332042816185978 0.00482088962812614"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/index1_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.112065 -0.0332042816185978 0.00482088962812614"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/index1_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="index1_joint"
+    type="continuous">
+    <origin
+      xyz="0.011065 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="index0_link" />
+    <child
+      link="index1_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="index2_link">
+    <inertial>
+      <origin
+        xyz="0.011260232587748 -1.19363814492235E-07 0.000912934102522963"
+        rpy="0 0 0" />
+      <mass
+        value="0.0012018255957334" />
+      <inertia
+        ixx="2.14873839792046E-08"
+        ixy="1.73077025311737E-12"
+        ixz="-8.15446109169507E-10"
+        iyy="7.67499282381513E-08"
+        iyz="-7.83803460317103E-13"
+        izz="8.22957800340716E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.140065 -0.0332042816185978 0.00482088962812614"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/index2_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.140065 -0.0332042816185978 0.00482088962812614"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/index2_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="index2_joint"
+    type="continuous">
+    <origin
+      xyz="0.028 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="index1_link" />
+    <child
+      link="index2_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="index3_link">
+    <inertial>
+      <origin
+        xyz="0.00793305359846655 -1.00217447611406E-07 0.00147487496928881"
+        rpy="0 0 0" />
+      <mass
+        value="0.000910431020949219" />
+      <inertia
+        ixx="1.35757156635728E-08"
+        ixy="3.53855905713055E-13"
+        ixz="-2.71897662954085E-09"
+        iyy="3.54748166911674E-08"
+        iyz="-8.4216667746927E-13"
+        izz="3.86572855926397E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.163065 -0.0332042816185978 0.00482088962812613"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/index3_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.163065 -0.0332042816185978 0.00482088962812613"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/index3_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="index3_joint"
+    type="continuous">
+    <origin
+      xyz="0.023 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="index2_link" />
+    <child
+      link="index3_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="middle0_link">
+    <inertial>
+      <origin
+        xyz="0.00442925219029291 -0.00024048354515252 0.00154956864744462"
+        rpy="0 0 0" />
+      <mass
+        value="0.000865618794438783" />
+      <inertia
+        ixx="1.85008888662594E-08"
+        ixy="3.48376945434496E-10"
+        ixz="1.63766051997173E-09"
+        iyy="2.47836199830436E-08"
+        iyz="6.91345957887713E-11"
+        izz="2.76194541617973E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.1025 -0.0112042816185978 0.00482088962812618"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/middle0_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.1025 -0.0112042816185978 0.00482088962812618"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/middle0_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="middle0_joint"
+    type="continuous">
+    <origin
+      xyz="0.1025 0.011204 -0.0048209"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="middle0_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="middle1_link">
+    <inertial>
+      <origin
+        xyz="0.0167436212590087 -4.335823186076E-08 0.000940864053543696"
+        rpy="0 0 0" />
+      <mass
+        value="0.00177023372578171" />
+      <inertia
+        ixx="3.13030948838648E-08"
+        ixy="1.72954842376729E-12"
+        ixz="-1.32899291939745E-09"
+        iyy="2.04018500696906E-07"
+        iyz="-4.8039843727576E-13"
+        izz="2.13099820038297E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.113565 -0.0112042816185978 0.00482088962812612"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/middle1_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.113565 -0.0112042816185978 0.00482088962812612"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/middle1_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="middle1_joint"
+    type="continuous">
+    <origin
+      xyz="0.011065 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="middle0_link" />
+    <child
+      link="middle1_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="middle2_link">
+    <inertial>
+      <origin
+        xyz="0.0112602325877495 -1.19363814405499E-07 0.000912934102522908"
+        rpy="0 0 0" />
+      <mass
+        value="0.00120182559573342" />
+      <inertia
+        ixx="2.14873839792051E-08"
+        ixy="1.73077025254459E-12"
+        ixz="-8.15446109168951E-10"
+        iyy="7.67499282381533E-08"
+        iyz="-7.83803460047114E-13"
+        izz="8.22957800340735E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.147565000000001 -0.0112042816185978 0.00482088962812609"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/middle2_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.147565000000001 -0.0112042816185978 0.00482088962812609"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/middle2_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="middle2_joint"
+    type="continuous">
+    <origin
+      xyz="0.034 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="middle1_link" />
+    <child
+      link="middle2_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="middle3_link">
+    <inertial>
+      <origin
+        xyz="0.0089273980508191 -2.14833632290051E-08 0.00157897280701512"
+        rpy="0 0 0" />
+      <mass
+        value="0.000970653119625089" />
+      <inertia
+        ixx="1.40693289298021E-08"
+        ixy="2.53656234603147E-13"
+        ixz="-3.63901811689524E-09"
+        iyy="4.83103193663389E-08"
+        iyz="-1.51110027206462E-13"
+        izz="5.18725651104433E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.170565000000003 -0.0112042816185978 0.00482088962812607"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/middle3_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.170565000000003 -0.0112042816185978 0.00482088962812607"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/middle3_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="middle3_joint"
+    type="continuous">
+    <origin
+      xyz="0.023 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="middle2_link" />
+    <child
+      link="middle3_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="ring0_link">
+    <inertial>
+      <origin
+        xyz="0.00442936296532616 0.000240478428380543 0.00154958292111541"
+        rpy="0 0 0" />
+      <mass
+        value="0.00086561068976276" />
+      <inertia
+        ixx="1.8501271956858E-08"
+        ixy="-3.48929263937424E-10"
+        ixz="1.63762251131658E-09"
+        iyy="2.47826343794035E-08"
+        iyz="-6.91128946477393E-11"
+        izz="2.76190509934314E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.0985 0.0107957183814022 0.00482088962812614"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/ring0_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0985 0.0107957183814022 0.00482088962812614"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/ring0_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="ring0_joint"
+    type="continuous">
+    <origin
+      xyz="0.0985 -0.010796 -0.0048209"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="ring0_link" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="ring1_link">
+    <inertial>
+      <origin
+        xyz="0.0137510540879233 -7.69130323579476E-08 0.000928358035499052"
+        rpy="0 0 0" />
+      <mass
+        value="0.00146017613490542" />
+      <inertia
+        ixx="2.5949197771774E-08"
+        ixy="1.81491841606301E-12"
+        ixz="-1.04888119608408E-09"
+        iyy="1.23664189367534E-07"
+        iyz="-6.43050789666237E-13"
+        izz="1.30816910156843E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.109565 0.0107957183814022 0.00482088962812612"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/ring1_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.109565 0.0107957183814022 0.00482088962812612"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/ring1_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="ring1_joint"
+    type="continuous">
+    <origin
+      xyz="0.011065 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="ring0_link" />
+    <child
+      link="ring1_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="ring2_link">
+    <inertial>
+      <origin
+        xyz="0.0112602325877481 -1.19363814476622E-07 0.000912934102522982"
+        rpy="0 0 0" />
+      <mass
+        value="0.0012018255957334" />
+      <inertia
+        ixx="2.14873839792045E-08"
+        ixy="1.7307702529774E-12"
+        ixz="-8.15446109169569E-10"
+        iyy="7.67499282381512E-08"
+        iyz="-7.83803460293969E-13"
+        izz="8.22957800340715E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.137565 0.0107957183814022 0.0048208896281261"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/ring2_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.137565 0.0107957183814022 0.0048208896281261"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/ring2_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="ring2_joint"
+    type="continuous">
+    <origin
+      xyz="0.028 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="ring1_link" />
+    <child
+      link="ring2_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="ring3_link">
+    <inertial>
+      <origin
+        xyz="0.00892942643498584 5.09770989500641E-08 0.0015793976806306"
+        rpy="0 0 0" />
+      <mass
+        value="0.000970828285693868" />
+      <inertia
+        ixx="1.40708768142787E-08"
+        ixy="-5.94614823512218E-13"
+        ixz="-3.64395236609298E-09"
+        iyy="4.83336092846273E-08"
+        iyz="-3.35288409638384E-13"
+        izz="5.18952346733404E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.160565 0.0107957183814022 0.00482088962812609"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/ring3_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.160565 0.0107957183814022 0.00482088962812609"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/ring3_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="ring3_joint"
+    type="continuous">
+    <origin
+      xyz="0.023 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="ring2_link" />
+    <child
+      link="ring3_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="little0_link">
+    <inertial>
+      <origin
+        xyz="0.0044500342179353 0.000240990643829896 0.00154967481703988"
+        rpy="0 0 0" />
+      <mass
+        value="0.00086552681180387" />
+      <inertia
+        ixx="1.84988440487453E-08"
+        ixy="-2.30248947515415E-10"
+        ixz="1.65461382896561E-09"
+        iyy="2.48489821319377E-08"
+        iyz="-6.86922036258825E-11"
+        izz="2.76831359592665E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.0924999999999999 0.0327957183814022 0.00482088962812613"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/little0_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0924999999999999 0.0327957183814022 0.00482088962812613"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/little0_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="little0_joint"
+    type="continuous">
+    <origin
+      xyz="0.0925 -0.032796 -0.0048209"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="little0_link" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="little1_link">
+    <inertial>
+      <origin
+        xyz="0.0112602325877481 -1.19363814436724E-07 0.000912934102522962"
+        rpy="0 0 0" />
+      <mass
+        value="0.00120182559573341" />
+      <inertia
+        ixx="2.14873839792045E-08"
+        ixy="1.730770253052E-12"
+        ixz="-8.15446109169465E-10"
+        iyy="7.67499282381512E-08"
+        iyz="-7.83803460300027E-13"
+        izz="8.22957800340716E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.103565 0.0327957183814022 0.00482088962812612"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/little1_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.103565 0.0327957183814022 0.00482088962812612"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/little1_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="little1_joint"
+    type="continuous">
+    <origin
+      xyz="0.011065 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="little0_link" />
+    <child
+      link="little1_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="little2_link">
+    <inertial>
+      <origin
+        xyz="0.0112602325877481 -1.19363814471418E-07 0.000912934102522993"
+        rpy="0 0 0" />
+      <mass
+        value="0.00120182559573339" />
+      <inertia
+        ixx="2.14873839792043E-08"
+        ixy="1.73077025324244E-12"
+        ixz="-8.15446109169762E-10"
+        iyy="7.67499282381502E-08"
+        iyz="-7.83803460384775E-13"
+        izz="8.22957800340707E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.126565 0.0327957183814022 0.00482088962812612"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/little2_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.126565 0.0327957183814022 0.00482088962812612"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/little2_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="little2_joint"
+    type="continuous">
+    <origin
+      xyz="0.023 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="little1_link" />
+    <child
+      link="little2_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="little3_link">
+    <inertial>
+      <origin
+        xyz="0.00793305359846558 -1.00217447819573E-07 0.0014748749692887"
+        rpy="0 0 0" />
+      <mass
+        value="0.000910431020949146" />
+      <inertia
+        ixx="1.3575715663573E-08"
+        ixy="3.53855906394732E-13"
+        ixz="-2.71897662954052E-09"
+        iyy="3.54748166911656E-08"
+        iyz="-8.42166677482282E-13"
+        izz="3.86572855926381E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.149565 0.0327957183814022 0.00482088962812612"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/little3_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.149565 0.0327957183814022 0.00482088962812612"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/little3_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="little3_joint"
+    type="continuous">
+    <origin
+      xyz="0.023 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="little2_link" />
+    <child
+      link="little3_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="abduction_pulley_link">
+    <inertial>
+      <origin
+        xyz="5.3614733367624E-05 -5.38369011636791E-05 -0.000552318187598597"
+        rpy="0 0 0" />
+      <mass
+        value="0.0010766893572167" />
+      <inertia
+        ixx="2.21586596253831E-08"
+        ixy="-2.31408490056438E-10"
+        ixz="-7.3880453641471E-12"
+        iyy="2.21540492822443E-08"
+        iyz="7.5170062792989E-12"
+        izz="4.25056471041653E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.03935 0.00177911037187388 0.000545718381402215"
+        rpy="1.5707963267949 1.29019936132077E-31 -1.99139881675999E-16" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/abduction_pulley_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.03935 0.00177911037187388 0.000545718381402215"
+        rpy="1.5707963267949 1.29019936132077E-31 -1.99139881675999E-16" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/abduction_pulley_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="abduction_pulley_joint"
+    type="continuous">
+    <origin
+      xyz="0.03935 -0.00054572 0.0017791"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="abduction_pulley_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="thumb0_link">
+    <inertial>
+      <origin
+        xyz="0.00490948453425204 0.00823348720595297 -0.0139224677087456"
+        rpy="0 0 0" />
+      <mass
+        value="0.0241864472025138" />
+      <inertia
+        ixx="2.10235430170048E-06"
+        ixy="3.41733799960731E-07"
+        ixz="-2.29530984870092E-07"
+        iyy="3.89468912531228E-06"
+        iyz="1.53880790916806E-07"
+        izz="2.87880291462021E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.0328826153762667 0.00482088962812612 -0.0296557972802439"
+        rpy="-1.5707963267949 -1.0471975511966 -3.46673756997496E-16" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/thumb0_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0328826153762667 0.00482088962812612 -0.0296557972802439"
+        rpy="-1.5707963267949 -1.0471975511966 -3.46673756997496E-16" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/thumb0_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="thumb0_joint"
+    type="continuous">
+    <origin
+      xyz="0.042124 0.013649 -0.0048209"
+      rpy="1.5708 0 1.0472" />
+    <parent
+      link="base_link" />
+    <child
+      link="thumb0_link" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="thumb1_link">
+    <inertial>
+      <origin
+        xyz="0.0137510773206959 -3.37657975158639E-06 0.000928349930009055"
+        rpy="0 0 0" />
+      <mass
+        value="0.00146017880427376" />
+      <inertia
+        ixx="2.59492255114871E-08"
+        ixy="1.77651090860862E-12"
+        ixz="-1.04871082205363E-09"
+        iyy="1.23664341837565E-07"
+        iyz="-6.45973666792012E-13"
+        izz="1.30817008806284E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.0742902872672215 0.00836208971960547 0.00188353327859132"
+        rpy="1.22250351988481 0.690978642564339 -0.395713866241802" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/thumb1_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0742902872672215 0.00836208971960547 0.00188353327859132"
+        rpy="1.22250351988481 0.690978642564339 -0.395713866241802" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/thumb1_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="thumb1_joint"
+    type="continuous">
+    <origin
+      xyz="0.037608 0.00027186 -0.0051015"
+      rpy="-2.8252 -0.27719 -0.16884" />
+    <parent
+      link="thumb0_link" />
+    <child
+      link="thumb1_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="thumb2_link">
+    <inertial>
+      <origin
+        xyz="0.0117200360787089 -3.86552387027748E-06 0.00156309160214176"
+        rpy="0 0 0" />
+      <mass
+        value="0.00128033020230237" />
+      <inertia
+        ixx="1.85862258772901E-08"
+        ixy="1.09759915523202E-11"
+        ixz="-3.84141593947311E-09"
+        iyy="8.92636833989613E-08"
+        iyz="-1.12184683682439E-12"
+        izz="9.49121699983353E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.102290287267221 0.00836208971960539 0.00188353327859131"
+        rpy="1.22250351988481 0.690978642564338 -0.395713866241801" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/thumb2_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.102290287267221 0.00836208971960539 0.00188353327859131"
+        rpy="1.22250351988481 0.690978642564338 -0.395713866241801" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/thumb2_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="thumb2_joint"
+    type="continuous">
+    <origin
+      xyz="0.028 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="thumb1_link" />
+    <child
+      link="thumb2_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="thumb_pulley_link">
+    <inertial>
+      <origin
+        xyz="5.38465914628403E-05 5.36886299069908E-05 -0.000552210642739609"
+        rpy="0 0 0" />
+      <mass
+        value="0.00107666800871982" />
+      <inertia
+        ixx="2.21536756600953E-08"
+        ixy="2.31379805506018E-10"
+        ixz="-7.40799898094335E-12"
+        iyy="2.21586466514205E-08"
+        iyz="-7.38582474612062E-12"
+        izz="4.25053533446759E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.0257346063659403 0.0136403339258093 -0.0518402138005088"
+        rpy="1.60441591199814 -0.371618192617417 -0.0122120607193594" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/thumb_pulley_link.3dxml" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0257346063659403 0.0136403339258093 -0.0518402138005088"
+        rpy="1.60441591199814 -0.371618192617417 -0.0122120607193594" />
+      <geometry>
+        <mesh
+          filename="package://feetech_hand/meshes/thumb_pulley_link.3dxml" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="thumb_pulley_joint"
+    type="continuous">
+    <origin
+      xyz="0.02265 0.016831 -0.012116"
+      rpy="3.1103 -1.419 0" />
+    <parent
+      link="thumb0_link" />
+    <child
+      link="thumb_pulley_link" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+</robot>

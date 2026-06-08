@@ -1,0 +1,27 @@
+<launch>
+  <param
+    name="robot_description"
+    textfile="$(find feetech_hand)/urdf/feetech_hand_dae.urdf" />
+
+  <node
+    name="robot_state_publisher"
+    pkg="robot_state_publisher"
+    type="robot_state_publisher" />
+
+  <node
+    name="feetech_hand_gestures"
+    pkg="feetech_hand"
+    type="gesture_joint_states.py"
+    output="screen">
+    <param name="topic" value="/joint_states" />
+    <param name="alias_topic" value="/joint_state" />
+    <param name="rate" value="50.0" />
+    <param name="human_motion" value="1.0" />
+    <param name="loop" value="true" />
+  </node>
+
+  <node
+    name="rviz"
+    pkg="rviz"
+    type="rviz" />
+</launch>
