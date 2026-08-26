@@ -1882,7 +1882,7 @@
   <joint name="r_feetech_mount_joint" type="fixed">
     <parent link="r_hand_link"/>
     <child link="r_feetech_base_link"/>
-    <origin rpy="0 1.5707963267948966 0" xyz="-0.01 0.004 0.01"/>
+    <origin rpy="1.5707963267948966 1.5707963267948966 0" xyz="0.01 0.004 0.01"/>
   </joint>
   <link name="r_feetech_base_link">
     <inertial>
@@ -2585,7 +2585,7 @@
   <joint name="l_feetech_mount_joint" type="fixed">
     <parent link="l_hand_link"/>
     <child link="l_feetech_base_link"/>
-    <origin rpy="0 1.5707963267948966 0" xyz="-0.01 -0.004 0.01"/>
+    <origin rpy="-1.5707963267948966 1.5707963267948966 0" xyz="0.01 -0.004 0.01"/>
   </joint>
   <link name="l_feetech_base_link">
     <inertial>
@@ -3286,3 +3286,4 @@
     <color rgba="0.75294118 0.75294118 0.75294118 1.        "/>
   </material>
 </robot>
+
