@@ -1,8 +1,57 @@
 <?xml version="1.0" ?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="aero_with_feetech_hand">
   <!--AERO nohand with Feetech hands attached to r_hand_link and l_hand_link.-->
+  <!--
+    Args:
+      r_flexible_wrist / l_flexible_wrist (default: right only, as on the real robot)
+          true: insert the passive flexible wrist (flexible_wrist.xacro) between ${side}_hand_link and
+          the hand. The bottom face of the wrist is put on the robot flange (the hand mount face without
+          the wrist) and the hand keeps its orientation, moved away from the robot by
+          flexible_wrist_length (32 mm) along the hand axis.
+      wrist_yaw   rotation [rad] of the wrists about the hand axis (visual only).
+
+    Generate the URDF with scripts/generate_aero_urdf.py, not with xacro alone: it also applies the
+    l_hand_y_joint fix and moves {r,l}_eef_grasp/pick_joint of a side WITHOUT the wrist toward the
+    wrist by flexible_wrist_length (the IK tips are defined assuming the wrist).
+      generate_aero_urdf.py                                    # right wrist only (default)
+      generate_aero_urdf.py -o out.urdf r_flexible_wrist:=false
+  -->
+  <xacro:arg name="r_flexible_wrist" default="true"/>
+  <xacro:arg name="l_flexible_wrist" default="false"/>
+  <xacro:arg name="wrist_yaw" default="0.0"/>
+  <xacro:property name="wrist_yaw" value="$(arg wrist_yaw)"/>
+
   <xacro:include filename="/home/leus/.skrobot/aero_description/typeJSK/urdf/aero_nohand.urdf"/>
   <xacro:include filename="/home/leus/ros/hand/src/feetech_hand/urdf/feetech_hand.xacro"/>
-  <xacro:feetech_hand prefix="r_feetech" parent="r_hand_link" mount_xyz="0.01 0.004 0.01" mount_rpy="1.5707963267948966 1.5707963267948966 0" reflect="1" mesh_scale="1 1 1"/>
-  <xacro:feetech_hand prefix="l_feetech" parent="l_hand_link" mount_xyz="0.01 -0.004 0.01" mount_rpy="-1.5707963267948966 1.5707963267948966 0" reflect="-1" mesh_scale="1 -1 1"/>
+  <xacro:include filename="/home/leus/ros/hand/src/feetech_hand/urdf/flexible_wrist.xacro"/>
+
+  <!--
+    side: r / l.  The hand mount face (robot flange) is the plane z = face_z of ${side}_hand_link
+    (normal -z); the hand base_link origin lies on that plane at (hand_x, hand_y).
+  -->
+  <xacro:macro name="aero_feetech_hand" params="side wrist face_z hand_x hand_y hand_rpy reflect mesh_scale">
+    <xacro:if value="${wrist}">
+      <!-- wrist z axis = -z of ${side}_hand_link (toward the hand), on the hand_link z axis -->
+      <xacro:flexible_wrist prefix="${side}" parent="${side}_hand_link"
+                            mount_xyz="0 0 ${face_z}" mount_rpy="${pi} 0 ${wrist_yaw}"/>
+      <!-- frame with the orientation of ${side}_hand_link, at the hand face of the wrist -->
+      <link name="${side}_wrist_hand_flange_link"/>
+      <joint name="${side}_wrist_hand_flange_joint" type="fixed">
+        <parent link="${side}_wrist_hand_mount_link"/>
+        <child link="${side}_wrist_hand_flange_link"/>
+        <origin xyz="0 0 0" rpy="${pi} 0 ${-wrist_yaw}"/>
+      </joint>
+      <xacro:feetech_hand prefix="${side}_feetech" parent="${side}_wrist_hand_flange_link"
+                          mount_xyz="${hand_x} ${hand_y} 0" mount_rpy="${hand_rpy}" reflect="${reflect}" mesh_scale="${mesh_scale}"/>
+    </xacro:if>
+    <xacro:unless value="${wrist}">
+      <xacro:feetech_hand prefix="${side}_feetech" parent="${side}_hand_link"
+                          mount_xyz="${hand_x} ${hand_y} ${face_z}" mount_rpy="${hand_rpy}" reflect="${reflect}" mesh_scale="${mesh_scale}"/>
+    </xacro:unless>
+  </xacro:macro>
+
+  <xacro:aero_feetech_hand side="r" wrist="$(arg r_flexible_wrist)" face_z="0.01" hand_x="0.01" hand_y="0.004"
+                           hand_rpy="1.5707963267948966 1.5707963267948966 0" reflect="1" mesh_scale="1 1 1"/>
+  <xacro:aero_feetech_hand side="l" wrist="$(arg l_flexible_wrist)" face_z="0.01" hand_x="0.01" hand_y="-0.004"
+                           hand_rpy="-1.5707963267948966 1.5707963267948966 0" reflect="-1" mesh_scale="1 -1 1"/>
 </robot>

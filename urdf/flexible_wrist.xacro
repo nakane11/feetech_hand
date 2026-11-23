@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!--
+    Passive flexible wrist (adjustable-ft-v33.scad), three printed parts screwed together.
+    Order from the hand: wrist_top (hand_base_plate) / wrist_base (base_ring) / wrist_bottom (stopper_ring).
+    Meshes: meshes/flexible_wrist/*.stl, exported from meshes/flexible_wrist/src/adjustable-ft-v33.scad
+    (scripts/export_flexible_wrist_scad.ps1, then scripts/build_flexible_wrist_meshes.py).
+
+    Frames (all meshes are in the SCAD frame; only wrist_top is lifted by 0.5 mm, see below), +z toward the hand:
+      ${prefix}_wrist_robot_face_link  bottom face of wrist_bottom, put on the robot flange (mount_xyz/rpy).
+      ${prefix}_wrist_base_link        bottom face of the inner core (SCAD origin), z = +7.0 mm.
+      ${prefix}_wrist_hand_mount_link  top face of wrist_top, z = +32.0 mm (= flexible_wrist_length), attach the hand here.
+    The spring (passive) compliance is modeled as rigid.
+    Mass: solid PLA (1240 kg/m^3) computed from the meshes; the real infill is lighter.
+  -->
+  <!-- bottom face of wrist_bottom to top face of wrist_top [m]. scripts/generate_aero_urdf.py reads this. -->
+  <xacro:property name="flexible_wrist_length" value="0.032"/>
+  <xacro:property name="flexible_wrist_bottom_thickness" value="0.007"/>
+  <xacro:macro name="flexible_wrist_part" params="prefix part mass com ixx iyy izz z0 z1 rgba">
+    <link name="${prefix}_wrist_${part}_link">
+      <inertial>
+        <origin xyz="${com}" rpy="0 0 0"/>
+        <mass value="${mass}"/>
+        <inertia ixx="${ixx}" ixy="0" ixz="0" iyy="${iyy}" iyz="0" izz="${izz}"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://feetech_hand/meshes/flexible_wrist/wrist_${part}.stl"/>
+        </geometry>
+        <material name="${prefix}_wrist_${part}_material">
+          <color rgba="${rgba}"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 ${(z0 + z1) / 2}" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.031" length="${z1 - z0}"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="flexible_wrist" params="prefix parent mount_xyz:='0 0 0' mount_rpy:='0 0 0'">
+    <joint name="${prefix}_wrist_mount_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${prefix}_wrist_robot_face_link"/>
+      <origin xyz="${mount_xyz}" rpy="${mount_rpy}"/>
+    </joint>
+    <link name="${prefix}_wrist_robot_face_link"/>
+    <joint name="${prefix}_wrist_base_joint" type="fixed">
+      <parent link="${prefix}_wrist_robot_face_link"/>
+      <child link="${prefix}_wrist_base_link"/>
+      <origin xyz="0 0 ${flexible_wrist_bottom_thickness}" rpy="0 0 0"/>
+    </joint>
+    <xacro:flexible_wrist_part prefix="${prefix}" part="base" mass="0.01689" com="-0.00025 -0.0003 0.0029"
+                               ixx="3.852e-06" iyy="3.928e-06" izz="7.631e-06" z0="0.0" z1="0.0095"
+                               rgba="0.3 0.3 0.3 1"/>
+    <xacro:flexible_wrist_part prefix="${prefix}" part="bottom" mass="0.01170" com="0 0 -0.00396"
+                               ixx="4.280e-06" iyy="4.280e-06" izz="8.465e-06" z0="-0.007" z1="0.0"
+                               rgba="0.2 0.35 0.8 1"/>
+    <xacro:flexible_wrist_part prefix="${prefix}" part="top" mass="0.03044" com="0 0 0.01522"
+                               ixx="1.000e-05" iyy="1.000e-05" izz="1.773e-05" z0="0.004" z1="0.0245"
+                               rgba="0.95 0.55 0.15 1"/>
+    <joint name="${prefix}_wrist_bottom_joint" type="fixed">
+      <parent link="${prefix}_wrist_base_link"/>
+      <child link="${prefix}_wrist_bottom_link"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+    <!-- In the SCAD the top plate starts at z = h_outer - 2 = 4.0 mm but the outer ring is 4.5 mm high
+         (0.5 mm interference). The real plate sits on the outer ring, so lift it by 0.5 mm. -->
+    <joint name="${prefix}_wrist_top_joint" type="fixed">
+      <parent link="${prefix}_wrist_base_link"/>
+      <child link="${prefix}_wrist_top_link"/>
+      <origin xyz="0 0 0.0005" rpy="0 0 0"/>
+    </joint>
+    <link name="${prefix}_wrist_hand_mount_link"/>
+    <joint name="${prefix}_wrist_hand_mount_joint" type="fixed">
+      <parent link="${prefix}_wrist_top_link"/>
+      <child link="${prefix}_wrist_hand_mount_link"/>
+      <!-- 0.0245 (SCAD top face) + 0.0005 (lift) + bottom thickness = flexible_wrist_length -->
+      <origin xyz="0 0 ${flexible_wrist_length - flexible_wrist_bottom_thickness - 0.0005}" rpy="0 0 0"/>
+    </joint>
+  </xacro:macro>
+</robot>

@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="flexible_wrist">
+  <!--Standalone flexible wrist, for checking the assembly.-->
+  <xacro:include filename="flexible_wrist.xacro"/>
+  <link name="world"/>
+  <xacro:flexible_wrist prefix="r" parent="world"/>
+</robot>
