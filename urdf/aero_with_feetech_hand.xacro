@@ -4,15 +4,16 @@
   <!--
     Args:
       r_flexible_wrist / l_flexible_wrist (default: right only, as on the real robot)
-          true: insert the passive flexible wrist (flexible_wrist.xacro) between ${side}_hand_link and
-          the hand. The bottom face of the wrist is put on the robot flange (the hand mount face without
-          the wrist) and the hand keeps its orientation, moved away from the robot by
-          flexible_wrist_length (32 mm) along the hand axis.
+          false: the hand bottom plate (meshes/hand_mount/wrist.STL) is screwed directly to the robot flange.
+          true:  the passive flexible wrist with its arm adapter (flexible_wrist.xacro) is put between the
+                 robot flange and the hand, and the hand bottom plate is meshes/hand_mount/wrist_ver2.STL
+                 (same outline and thickness as wrist.STL). The hand keeps its orientation and moves
+                 flexible_wrist_length (49 mm) along the hand axis, plus sideways (see below).
       wrist_yaw   rotation [rad] of the wrists about the hand axis (visual only).
 
     Generate the URDF with scripts/generate_aero_urdf.py, not with xacro alone: it also applies the
-    l_hand_y_joint fix and moves {r,l}_eef_grasp/pick_joint of a side WITHOUT the wrist toward the
-    wrist by flexible_wrist_length (the IK tips are defined assuming the wrist).
+    l_hand_y_joint fix and moves {r,l}_eef_grasp/pick_joint of a side WITHOUT the wrist so that the IK tips
+    keep the same place relative to the hand (the IK tips of aero_nohand.urdf are defined assuming the wrist).
       generate_aero_urdf.py                                    # right wrist only (default)
       generate_aero_urdf.py -o out.urdf r_flexible_wrist:=false
   -->
@@ -26,10 +27,17 @@
   <xacro:include filename="/home/leus/ros/hand/src/feetech_hand/urdf/flexible_wrist.xacro"/>
 
   <!--
-    side: r / l.  The hand mount face (robot flange) is the plane z = face_z of ${side}_hand_link
-    (normal -z); the hand base_link origin lies on that plane at (hand_x, hand_y).
+    side: r / l.  The robot flange face is the plane z = face_z of ${side}_hand_link (normal -z); its four
+    screw holes (20 x 39.7 mm, AERO hand_yaw/wrist.dae) are centered on the hand_link z axis.
+    The hand base_link origin lies on the mount face at (hand_x, hand_y) in hand_link axes:
+      without the wrist: the center of the 20 x 39.7 mm holes of wrist.STL is on the hand_link z axis.
+      with the wrist (*_wrist): the wrist axis is the hand_link z axis (the adapter's flange holes are
+        centered on it) and the center of the three wrist screw holes of wrist_ver2.STL (r = 18 mm) is on it.
+        In the hand plate this center is (+4.87, -4.65) mm (right hand) from the center of the 20 x 39.7 mm
+        holes.
   -->
-  <xacro:macro name="aero_feetech_hand" params="side wrist face_z hand_x hand_y hand_rpy reflect mesh_scale">
+  <xacro:macro name="aero_feetech_hand"
+               params="side wrist face_z hand_x hand_y hand_x_wrist hand_y_wrist hand_rpy reflect mesh_scale">
     <xacro:if value="${wrist}">
       <!-- wrist z axis = -z of ${side}_hand_link (toward the hand), on the hand_link z axis -->
       <xacro:flexible_wrist prefix="${side}" parent="${side}_hand_link"
@@ -42,7 +50,7 @@
         <origin xyz="0 0 0" rpy="${pi} 0 ${-wrist_yaw}"/>
       </joint>
       <xacro:feetech_hand prefix="${side}_feetech" parent="${side}_wrist_hand_flange_link"
-                          mount_xyz="${hand_x} ${hand_y} 0" mount_rpy="${hand_rpy}" reflect="${reflect}" mesh_scale="${mesh_scale}"/>
+                          mount_xyz="${hand_x_wrist} ${hand_y_wrist} 0" mount_rpy="${hand_rpy}" reflect="${reflect}" mesh_scale="${mesh_scale}"/>
     </xacro:if>
     <xacro:unless value="${wrist}">
       <xacro:feetech_hand prefix="${side}_feetech" parent="${side}_hand_link"
@@ -50,8 +58,11 @@
     </xacro:unless>
   </xacro:macro>
 
-  <xacro:aero_feetech_hand side="r" wrist="$(arg r_flexible_wrist)" face_z="0.01" hand_x="0.01" hand_y="0.004"
+  <!-- Until 2026-11 hand_x/hand_y were 0.01 / +-0.004: the holes were 9 mm off the flange holes. -->
+  <xacro:aero_feetech_hand side="r" wrist="$(arg r_flexible_wrist)" face_z="0.01"
+                           hand_x="0.0032" hand_y="0.01003" hand_x_wrist="-0.00167" hand_y_wrist="0.01468"
                            hand_rpy="1.5707963267948966 1.5707963267948966 0" reflect="1" mesh_scale="1 1 1"/>
-  <xacro:aero_feetech_hand side="l" wrist="$(arg l_flexible_wrist)" face_z="0.01" hand_x="0.01" hand_y="-0.004"
+  <xacro:aero_feetech_hand side="l" wrist="$(arg l_flexible_wrist)" face_z="0.01"
+                           hand_x="0.0032" hand_y="-0.01003" hand_x_wrist="-0.00167" hand_y_wrist="-0.01468"
                            hand_rpy="-1.5707963267948966 1.5707963267948966 0" reflect="-1" mesh_scale="1 -1 1"/>
 </robot>

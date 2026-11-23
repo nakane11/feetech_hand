@@ -1160,12 +1160,12 @@
   <joint name="l_eef_grasp_joint" type="fixed">
     <parent link="l_hand_link"/>
     <child link="l_eef_grasp_link"/>
-    <origin rpy="0 1.5708 0 " xyz="0 -0.03 -0.048"/>
+    <origin rpy="0 1.5708 0 " xyz="0.00487 -0.02535 -0.031"/>
   </joint>
   <joint name="l_eef_pick_joint" type="fixed">
     <parent link="l_hand_link"/>
     <child link="l_eef_pick_link"/>
-    <origin rpy="0 1.5708 0 " xyz="0 -0.05 -0.088"/>
+    <origin rpy="0 1.5708 0 " xyz="0.00487 -0.04535 -0.071"/>
   </joint>
   <joint name="upper_lower_connector" type="fixed">
     <parent link="lifter_top_link"/>
@@ -1885,10 +1885,39 @@
     <origin rpy="3.141592653589793 0 0.0" xyz="0 0 0.01"/>
   </joint>
   <link name="r_wrist_robot_face_link"/>
-  <joint name="r_wrist_base_joint" type="fixed">
+  <!-- wrist_to_arm.STL: z 0 = core side, z 24 mm = robot side, axis at x = y = 26.52 mm,
+         flange holes along the (1, 1) diagonal. Flip z and turn by -45 deg. -->
+  <joint name="r_wrist_adapter_joint" type="fixed">
     <parent link="r_wrist_robot_face_link"/>
+    <child link="r_wrist_adapter_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  <link name="r_wrist_adapter_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.009"/>
+      <mass value="0.01420"/>
+      <inertia ixx="2.524e-06" ixy="0" ixz="0" iyy="1.679e-06" iyz="0" izz="2.461e-06"/>
+    </inertial>
+    <visual>
+      <origin rpy="3.141592653589793 0 -0.7853981633974483" xyz="0 0.03750494367413448 0.024"/>
+      <geometry>
+        <mesh filename="package://feetech_hand/meshes/flexible_wrist/wrist_adapter.stl"/>
+      </geometry>
+      <material name="r_wrist_adapter_material">
+        <color rgba="0.55 0.55 0.6 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.012"/>
+      <geometry>
+        <box size="0.0342 0.0497 0.024"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="r_wrist_base_joint" type="fixed">
+    <parent link="r_wrist_adapter_link"/>
     <child link="r_wrist_base_link"/>
-    <origin rpy="0 0 0" xyz="0 0 0.007"/>
+    <origin rpy="0 0 0" xyz="0 0 0.024"/>
   </joint>
   <link name="r_wrist_base_link">
     <inertial>
@@ -1972,7 +2001,6 @@
   <joint name="r_wrist_hand_mount_joint" type="fixed">
     <parent link="r_wrist_top_link"/>
     <child link="r_wrist_hand_mount_link"/>
-    <!-- 0.0245 (SCAD top face) + 0.0005 (lift) + bottom thickness = flexible_wrist_length -->
     <origin rpy="0 0 0" xyz="0 0 0.0245"/>
   </joint>
   <!-- frame with the orientation of ${side}_hand_link, at the hand face of the wrist -->
@@ -1985,7 +2013,7 @@
   <joint name="r_feetech_mount_joint" type="fixed">
     <parent link="r_wrist_hand_flange_link"/>
     <child link="r_feetech_base_link"/>
-    <origin rpy="1.5707963267948966 1.5707963267948966 0" xyz="0.01 0.004 0"/>
+    <origin rpy="1.5707963267948966 1.5707963267948966 0" xyz="-0.00167 0.01468 0"/>
   </joint>
   <link name="r_feetech_base_link">
     <inertial>
@@ -2688,7 +2716,7 @@
   <joint name="l_feetech_mount_joint" type="fixed">
     <parent link="l_hand_link"/>
     <child link="l_feetech_base_link"/>
-    <origin rpy="-1.5707963267948966 1.5707963267948966 0" xyz="0.01 -0.004 0.01"/>
+    <origin rpy="-1.5707963267948966 1.5707963267948966 0" xyz="0.0032 -0.01003 0.01"/>
   </joint>
   <link name="l_feetech_base_link">
     <inertial>
